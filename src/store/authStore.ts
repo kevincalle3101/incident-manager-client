@@ -14,13 +14,13 @@ interface AuthState {
   register: (name: string, email: string, password: string) => Promise<string>;
   logout: () => void
 }
-
+const SERVER_URL = import.meta.env.URL_SERVIDOR;
 export const useAuthStore = create<AuthState>((set) => ({
   token: localStorage.getItem('token') || '',
   user: JSON.parse(localStorage.getItem('user') || '{}'),
   login: async (email, password) => {
     try {
-      const response = await axios.post('http://localhost:3001/auth/login', { email, password });
+      const response = await axios.post(`${SERVER_URL}/auth/login`, { email, password });
       const { token, name, email: userEmail, isAdmin } = response.data;
       const user = { name, email: userEmail, isAdmin };
       set({ token, user });
@@ -32,7 +32,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
   register: async ( name, email, password ) => {
     try {
-      const response = await axios.post('http://localhost:3001/auth/signup', { name, email, password });
+      const response = await axios.post(`${SERVER_URL}/auth/signup`, { name, email, password });
       return response.data.message;
     } catch (error) {
       throw new Error('Error al registrar usuario');

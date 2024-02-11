@@ -37,6 +37,8 @@ interface IncidenceState {
   fetchCommentsByIncidenceId: (id: number) => Promise<void>;
 }
 
+const SERVER_URL = import.meta.env.URL_SERVIDOR;
+
 export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
   allIncidences: [],
   Comments: [],
@@ -46,7 +48,7 @@ export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
       if (!token) {
         throw new Error('Token not found in localStorage');
       }
-      const response = await axios.get<Incidence[]>('http://localhost:3001/incidence', {
+      const response = await axios.get<Incidence[]>(`${SERVER_URL}/incidence`, {
         headers: {
           'x-access-token': token,
         },
@@ -63,7 +65,7 @@ export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
       if (!token) {
         throw new Error('Token not found in localStorage');
       }
-      await axios.put(`http://localhost:3001/incidence/${id}`, { isResolved: true }, {
+      await axios.put(`${SERVER_URL}/incidence/${id}`, { isResolved: true }, {
         headers: {
           'x-access-token': token,
         },
@@ -83,7 +85,7 @@ export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
       if (!token) {
         throw new Error('Token not found in localStorage');
       }
-      await axios.delete(`http://localhost:3001/incidence/${id}`, {
+      await axios.delete(`${SERVER_URL}/incidence/${id}`, {
         headers: {
           'x-access-token': token,
         },
@@ -101,7 +103,7 @@ export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
       if (!token) {
         throw new Error('Token not found in localStorage');
       }
-      const response = await axios.get<Incidence[]>(`http://localhost:3001/incidence/filters/${filter}`, {
+      const response = await axios.get<Incidence[]>(`${SERVER_URL}/incidence/filters/${filter}`, {
         headers: {
           'x-access-token': token,
         },
@@ -119,7 +121,7 @@ export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
         throw new Error('Token not found in localStorage');
       }
       const response = await axios.post(
-        `http://localhost:3001/incidence/${id}/comments`,
+        `${SERVER_URL}/incidence/${id}/comments`,
         { content },
         {
           headers: {
@@ -140,7 +142,7 @@ export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
       if (!token) {
         throw new Error('Token no encontrado en localStorage');
       }
-      const response = await axios.get(`http://localhost:3001/incidence/${id}`, {
+      const response = await axios.get(`${SERVER_URL}/incidence/${id}`, {
         headers: {
           'x-access-token': token,
         },

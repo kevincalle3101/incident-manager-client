@@ -80,7 +80,7 @@ const CreateIncidence = () => {
       setSubmitButtonDisabled(false);
     }
   };
-
+  const SERVER_URL = import.meta.env.URL_SERVIDOR;
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const token = localStorage.getItem('token');
@@ -93,7 +93,7 @@ const CreateIncidence = () => {
         formDataToSend.append('location', JSON.stringify(formData.location));
         formDataToSend.append('image', formData.image || '');
 
-        const response = await axios.post('http://localhost:3001/incidence', formDataToSend, {
+        const response = await axios.post(`${SERVER_URL}/incidence`, formDataToSend, {
           headers,
         });
         if (response.status === 201) {
