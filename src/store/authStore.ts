@@ -14,7 +14,8 @@ interface AuthState {
   register: (name: string, email: string, password: string) => Promise<string>;
   logout: () => void
 }
-const SERVER_URL = import.meta.env.URL_SERVIDOR;
+const SERVER_URL = import.meta.env.VITE_URL_SERVIDOR;
+
 export const useAuthStore = create<AuthState>((set) => ({
   token: localStorage.getItem('token') || '',
   user: JSON.parse(localStorage.getItem('user') || '{}'),

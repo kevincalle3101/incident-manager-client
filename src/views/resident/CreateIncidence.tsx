@@ -80,7 +80,7 @@ const CreateIncidence = () => {
       setSubmitButtonDisabled(false);
     }
   };
-  const SERVER_URL = import.meta.env.URL_SERVIDOR;
+  const SERVER_URL = import.meta.env.VITE_URL_SERVIDOR;
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const token = localStorage.getItem('token');

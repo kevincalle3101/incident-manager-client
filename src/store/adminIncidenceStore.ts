@@ -37,7 +37,7 @@ interface IncidenceState {
   fetchCommentsByIncidenceId: (id: number) => Promise<void>;
 }
 
-const SERVER_URL = import.meta.env.URL_SERVIDOR;
+const SERVER_URL = import.meta.env.VITE_URL_SERVIDOR;
 
 export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
   allIncidences: [],
@@ -55,7 +55,6 @@ export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
       });
       set({ allIncidences: response.data });
     } catch (error) {
-      console.error('Error fetching incidences:', error);
       throw error;
     }
   },
@@ -110,7 +109,6 @@ export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
       });
       set({ allIncidences: response.data });
     } catch (error) {
-      console.error('Error fetching filtered incidences:', error);
       throw error;
     }
   },
@@ -120,7 +118,7 @@ export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
       if (!token) {
         throw new Error('Token not found in localStorage');
       }
-      const response = await axios.post(
+      await axios.post(
         `${SERVER_URL}/incidence/${id}/comments`,
         { content },
         {
@@ -130,9 +128,7 @@ export const useAdminIncidenceStore = create<IncidenceState>((set) => ({
           },
         }
       );
-      console.log('Response de post', response.data);
     } catch (error) {
-      console.error('Error al postear un comentario', error);
       throw error;
     }
   },
