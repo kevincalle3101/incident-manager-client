@@ -41,7 +41,10 @@ function ResidentHome() {
 
   const { fetchIncidences } = useUserIncidenceStore();
   useEffect(() => {
-    fetchIncidences();
+    const fetchData = async () => {
+      await fetchIncidences();
+    };
+    fetchData();
   }, []);
   return (
     <Container>

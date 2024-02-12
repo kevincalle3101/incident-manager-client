@@ -56,7 +56,10 @@ function AdminHome() {
 
   const { fetchIncidences } = useAdminIncidenceStore();
   useEffect(() => {
-    fetchIncidences();
+    const fetchData = async () => {
+      await fetchIncidences();
+    };
+    fetchData();
   }, []);
   return (
     <Container>
@@ -116,7 +119,7 @@ function AdminHome() {
                       <FontAwesomeIcon icon={faTrash} />
                     </Button>
                     <Button variant="link" className="ms-0" title="Comentar" onClick={() => { handleModalCreateComment(incidence.id) }}>
-                      <FontAwesomeIcon icon={faComment} className="ms-2"/>
+                      <FontAwesomeIcon icon={faComment} className="ms-2" />
                     </Button>
                   </td>
                 </tr>
