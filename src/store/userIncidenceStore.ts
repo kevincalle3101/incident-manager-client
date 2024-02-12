@@ -99,7 +99,7 @@ export const useUserIncidenceStore = create<IncidenceState>((set) => ({
           'x-access-token': token,
         },
       });
-      const comments = response.data.Comments.map((comment: any) => comment);
+      const comments = response.data.Comments.map((comment: Comment) => comment);
       set({
         Comments: comments
       });

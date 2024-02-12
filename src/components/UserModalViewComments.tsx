@@ -14,7 +14,9 @@ const UserModalViewComments: React.FC<Props> = ({ show, handleClose, incidenceId
     const allComments = useUserIncidenceStore(useShallow((state) => state.Comments));
 
     useEffect(() => {
-        fetchCommentsByIncidenceId(incidenceId);
+        if (incidenceId > 0) {
+            fetchCommentsByIncidenceId(incidenceId);
+        }
     }, [fetchCommentsByIncidenceId, incidenceId]);
 
     return (
