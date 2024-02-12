@@ -31,7 +31,7 @@ interface IncidenceState {
   fetchCommentsByIncidenceId: (id: number) => Promise<void>;
 }
 
-const SERVER_URL = import.meta.env.VITE_URL_SERVIDOR;
+// const SERVER_URL = import.meta.env.VITE_URL_SERVIDOR;
 
 export const useUserIncidenceStore = create<IncidenceState>((set) => ({
   allIncidences: [],
@@ -42,7 +42,7 @@ export const useUserIncidenceStore = create<IncidenceState>((set) => ({
       if (!token) {
         throw new Error('Token not found in localStorage');
       }
-      const response = await axios.get<Incidence[]>(`${SERVER_URL}/incidence/byUser`, {
+      const response = await axios.get<Incidence[]>(`https://incident-manager-server.onrender.com/incidence/byUser`, {
         headers: {
           'x-access-token': token,
         },
@@ -58,7 +58,7 @@ export const useUserIncidenceStore = create<IncidenceState>((set) => ({
       if (!token) {
         throw new Error('Token not found in localStorage');
       }
-      const response = await axios.get<Incidence[]>(`${SERVER_URL}/incidence/filters/${filter}`, {
+      const response = await axios.get<Incidence[]>(`https://incident-manager-server.onrender.com/incidence/filters/${filter}`, {
         headers: {
           'x-access-token': token,
         },
@@ -75,7 +75,7 @@ export const useUserIncidenceStore = create<IncidenceState>((set) => ({
         throw new Error('Token not found in localStorage');
       }
       await axios.post(
-        `${SERVER_URL}/incidence/${id}/comments`,
+        `https://incident-manager-server.onrender.com/incidence/${id}/comments`,
         { content },
         {
           headers: {
@@ -94,7 +94,7 @@ export const useUserIncidenceStore = create<IncidenceState>((set) => ({
       if (!token) {
         throw new Error('Token no encontrado en localStorage');
       }
-      const response = await axios.get(`${SERVER_URL}/incidence/${id}`, {
+      const response = await axios.get(`https://incident-manager-server.onrender.com/incidence/${id}`, {
         headers: {
           'x-access-token': token,
         },
